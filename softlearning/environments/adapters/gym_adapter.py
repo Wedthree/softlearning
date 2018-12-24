@@ -111,6 +111,18 @@ GYM_ENVIRONMENTS = {
     'MultiGoal': {
         'Default': MultiGoalEnv
     },
+
+    'FetchReach': {
+        'Default': lambda: gym.envs.make('FetchReach-v1'),
+        'v1': lambda: gym.envs.make('FetchReach-v1e')
+
+    },
+
+    'FetchPickAndPlace': {
+        'Default': lambda: gym.envs.make('FetchPickAndPlace-v1'),
+        'v1': lambda: gym.envs.make('FetchPickAndPlace-v1')
+
+    }
 }
 
 
