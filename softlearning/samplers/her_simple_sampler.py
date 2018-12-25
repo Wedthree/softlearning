@@ -86,7 +86,7 @@ class HerSimpleSampler(BaseSampler):
     def add_her_samples(self, path, path_length):
         print(self._future_p)
         print(self._reward_fun)
-        print(last_path_length)
+        print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
         t_samples =  np.random.randint(path_length, size=her_sample_size)
 
