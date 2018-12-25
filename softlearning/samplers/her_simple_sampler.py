@@ -67,8 +67,12 @@ class HerSimpleSampler(BaseSampler):
         batch_size = batch_size or self._batch_size
         observation_keys = getattr(self.env, 'observation_keys', None)
 
-        return self.pool.random_batch(
+        random_batch = self.pool.random_batch(
             batch_size, observation_keys=observation_keys, **kwargs)
+
+        print(random_batch)
+
+        return random_batch
 
     def get_diagnostics(self):
         diagnostics = super(SimpleSampler, self).get_diagnostics()
