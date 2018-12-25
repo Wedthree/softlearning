@@ -67,13 +67,8 @@ class HerSimpleSampler(BaseSampler):
         batch_size = batch_size or self._batch_size
         observation_keys = getattr(self.env, 'observation_keys', None)
 
-        random_batch = self.pool.random_batch(
+        random_batch = self.pool.her_random_batch(
             batch_size, observation_keys=observation_keys, **kwargs)
-
-        print('++++++++++++')
-
-        for key, value in random_batch.items():
-            print(key, value.shape)
 
         return random_batch
 
