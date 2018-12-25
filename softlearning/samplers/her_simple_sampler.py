@@ -88,13 +88,11 @@ class HerSimpleSampler(BaseSampler):
         print(self._reward_fun)
         print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
+        her_sample_size = 5
         t_samples =  np.random.randint(path_length, size=her_sample_size)
 
-        for key in path.keys():
-            print(path[key][t_samples])
 
-
-        transitions = {key: path[key][t_samples].copy() for key in path.keys()}
+        transitions = {key: path[key][t_samples].copy() for key in path.keys() if key!='infos'}
 
         print(transitions)
 
