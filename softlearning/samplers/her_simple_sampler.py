@@ -45,7 +45,7 @@ class HerSimpleSampler(BaseSampler):
             last_path.update({'infos': self._infos})
 
             for key, values in last_path.items():
-                print(key, values)
+                print(key, values.shape)
 
 
 
