@@ -20,7 +20,7 @@ class HerSimpleSampler(BaseSampler):
 
         def reward_fun(ag_2, g, info):  # vectorized
 
-            return self.env.unwrapped.compute_reward(achieved_goal=ag_2, desired_goal=g, info=info)
+            return self.env.unwrapped.compute_reward(achieved_goal=ag_2, goal=g, info=info)
 
         self._reward_fun = reward_fun
 
