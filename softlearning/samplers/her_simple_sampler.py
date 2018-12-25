@@ -72,7 +72,7 @@ class HerSimpleSampler(BaseSampler):
 
         print('++++++++++++')
 
-        for key, value in random_batch.items()
+        for key, value in random_batch.items():
             print(key, value.shape)
 
         return random_batch
