@@ -70,7 +70,7 @@ class HerSimpleSampler(BaseSampler):
         random_batch = self.pool.random_batch(
             batch_size, observation_keys=observation_keys, **kwargs)
 
-        print(random_batch)
+        print(random_batch.keys())
 
         return random_batch
 
