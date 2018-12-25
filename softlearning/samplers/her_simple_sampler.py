@@ -132,10 +132,6 @@ class HerSimpleSampler(BaseSampler):
         print(inspect.getargspec(self.env.unwrapped.compute_reward))
         transitions['rewards'] = self._reward_fun(**reward_params)
 
-        transitions = {k: transitions[k].reshape(batch_size, *transitions[k].shape[1:])
-                       for k in transitions.keys()}
-
-
         print('--------After--------')
         print(transitions)
  
