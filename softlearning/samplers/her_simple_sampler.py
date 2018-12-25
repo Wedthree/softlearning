@@ -19,7 +19,7 @@ class HerSimpleSampler(BaseSampler):
         self._future_p = 1 - (1. / (1 + replay_k))
 
         def reward_fun(ag_2, g, info):  # vectorized
-            print(inspect.getargspec(self.env.unwrapped.compute_reward))
+
             return self.env.unwrapped.compute_reward(achieved_goal=ag_2, desired_goal=g, info=info)
 
         self._reward_fun = reward_fun
@@ -129,6 +129,7 @@ class HerSimpleSampler(BaseSampler):
         # Re-compute reward since we may have substituted the goal.
         reward_params = {'ag_2': transitions['observations.achieved_goal'], 'g': transitions['observations.desired_goal']}
         reward_params['info'] = infos
+        print(inspect.getargspec(self.env.unwrapped.compute_reward))
         transitions['rewards'] = self._reward_fun(**reward_params)
 
         transitions = {k: transitions[k].reshape(batch_size, *transitions[k].shape[1:])
