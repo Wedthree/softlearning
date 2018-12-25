@@ -90,6 +90,8 @@ class HerSimpleSampler(BaseSampler):
         her_sample_size = math.ceil(self._future_p*path_length)
         t_samples =  np.random.randint(path_length, size=her_sample_size)
 
+        print(path.keys())
+
         transitions = {key: path[key][t_samples].copy()
                                for key in path.keys()}
 
