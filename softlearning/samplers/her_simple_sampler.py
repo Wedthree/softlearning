@@ -150,7 +150,7 @@ class HerSimpleSampler(BaseSampler):
         return random_batch
 
     def get_diagnostics(self):
-        diagnostics = super(SimpleSampler, self).get_diagnostics()
+        diagnostics = super(HerSimpleSampler, self).get_diagnostics()
         diagnostics.update({
             'max-path-return': self._max_path_return,
             'last-path-return': self._last_path_return,
