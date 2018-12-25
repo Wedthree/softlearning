@@ -190,7 +190,7 @@ def get_variant_spec(universe, domain, task, policy):
             }
         },
         'sampler_params': {
-            'type': 'SimpleSampler',
+            'type': 'HerSimpleSampler',
             'kwargs': {
                 'max_path_length': MAX_PATH_LENGTH_PER_DOMAIN.get(
                     domain, DEFAULT_MAX_PATH_LENGTH),

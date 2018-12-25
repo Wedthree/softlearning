@@ -8,7 +8,8 @@ from . import (
     extra_policy_info_sampler,
     remote_sampler,
     sampler_base,
-    simple_sampler)
+    simple_sampler,
+    her_simple_sampler)
 
 
 def get_sampler_from_variant(variant, *args, **kwargs):
@@ -19,6 +20,7 @@ def get_sampler_from_variant(variant, *args, **kwargs):
         'RemoteSampler': remote_sampler.RemoteSampler,
         'Sampler': sampler_base.BaseSampler,
         'SimpleSampler': simple_sampler.SimpleSampler,
+        'HerSimpleSampler': her_simple_sampler.HerSimpleSampler
     }
 
     sampler_params = variant['sampler_params']
