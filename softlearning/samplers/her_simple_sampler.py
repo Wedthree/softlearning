@@ -88,13 +88,54 @@ class HerSimpleSampler(BaseSampler):
         print(self._reward_fun)
         print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
-        her_sample_size = 5
+        her_sample_size = 2
         t_samples =  np.random.randint(path_length, size=her_sample_size)
+
+        future_offset = np.random.uniform(size=her_sample_size) * (path_length - t_samples)
+        future_offset = future_offset.astype(int)
+        future_t = (t_samples + 1 + future_offset)
+
+        future_ag = path['observations.achieved_goal'][future_t]
+
 
 
         transitions = {key: path[key][t_samples].copy() for key in path.keys() if key!='infos'}
 
+        print('--------Before--------')
         print(transitions)
+
+        transitions['observations.desired_goal'] = future_ag
+        transitions['next_observations.desired_goal'] = future_ag
+
+        transitions['observations'] = np.concatenate([
+            transitions['observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
+        ], axis=-1)
+
+        transitions['next_observations.{}'.format(key)] = np.concatenate([
+            transitions['next_observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
+        ], axis=-1)
+
+        infos = []
+        for t in t_samples:
+            infos.append(path['infos'][t])
+
+        transitions['infos'] = infos
+
+            
+            
+
+        # Re-compute reward since we may have substituted the goal.
+        reward_params = {k: transitions[k] for k in ['observations.achieved_goal', 'observations.desired_goal']}
+        reward_params['info'] = infos
+        transitions['rewards'] = self._reward_fun(**reward_params)
+
+        transitions = {k: transitions[k].reshape(batch_size, *transitions[k].shape[1:])
+                       for k in transitions.keys()}
+
+
+        print('--------After--------')
+        print(transitions)
+ 
 
 
 
