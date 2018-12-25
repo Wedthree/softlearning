@@ -125,7 +125,7 @@ class HerSimpleSampler(BaseSampler):
             
 
         # Re-compute reward since we may have substituted the goal.
-        reward_params = {k: transitions[k] for k in ['observations.achieved_goal', 'observations.desired_goal']}
+        reward_params = {'ag_2': transitions['observations.achieved_goal'], 'g': transitions['observations.desired_goal']}
         reward_params['info'] = infos
         transitions['rewards'] = self._reward_fun(**reward_params)
 
