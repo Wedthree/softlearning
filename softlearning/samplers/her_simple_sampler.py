@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import inspect
 
 from .sampler_base import BaseSampler
 
@@ -18,6 +19,7 @@ class HerSimpleSampler(BaseSampler):
         self._future_p = 1 - (1. / (1 + replay_k))
 
         def reward_fun(ag_2, g, info):  # vectorized
+            print(inspect.getargspec(self.env.unwrapped.compute_reward))
             return self.env.unwrapped.compute_reward(achieved_goal=ag_2, desired_goal=g, info=info)
 
         self._reward_fun = reward_fun
