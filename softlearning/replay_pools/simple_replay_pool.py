@@ -89,25 +89,7 @@ class SimpleReplayPool(FlexibleReplayPool):
             num_samples, **kwargs)
 
 
-    def her_random_batch(self, batch_size, field_name_filter=None, **kwargs):
-        if self._size == 0:
-            random_indices = np.range(0, 0)
-        else:
-            random_indices = np.random.randint(0, self._size, batch_size)
-
-        her_random_batch = self.batch_by_indices(random_indices, field_name_filter=field_name_filter, **kwargs)
-
-        print("++++++++++")
-
-
-        for field_name in self.field_names:
-            print(getattr(self, field_name).shape)
-
-
-        for key, value in her_random_batch.items():
-            print(key, value.shape)
-
-        return her_random_batch
+ 
 
 
         
@@ -118,10 +100,6 @@ class SimpleReplayPool(FlexibleReplayPool):
         if not isinstance(self._observation_space, Dict):
             return super(SimpleReplayPool, self).batch_by_indices(
                 indices, field_name_filter=field_name_filter)
-
-
-        for field_name in self.field_names:
-            print(getattr(self, field_name).shape)
 
 
 

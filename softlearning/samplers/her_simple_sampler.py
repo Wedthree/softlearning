@@ -43,6 +43,10 @@ class HerSimpleSampler(BaseSampler):
                 self._path_length,
                 observation_keys=getattr(self.env, 'observation_keys', None))
             last_path.update({'infos': self._infos})
+
+            print(last_path)
+
+
             self._last_n_paths.appendleft(last_path)
 
             self.policy.reset()
@@ -67,7 +71,7 @@ class HerSimpleSampler(BaseSampler):
         batch_size = batch_size or self._batch_size
         observation_keys = getattr(self.env, 'observation_keys', None)
 
-        random_batch = self.pool.her_random_batch(
+        random_batch = self.pool.random_batch(
             batch_size, observation_keys=observation_keys, **kwargs)
 
         return random_batch
