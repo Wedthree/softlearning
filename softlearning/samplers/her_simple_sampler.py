@@ -44,7 +44,9 @@ class HerSimpleSampler(BaseSampler):
                 observation_keys=getattr(self.env, 'observation_keys', None))
             last_path.update({'infos': self._infos})
 
-            print(last_path)
+            for key, values in last_path.items():
+                print(key, values)
+
 
 
             self._last_n_paths.appendleft(last_path)
