@@ -88,7 +88,7 @@ class HerSimpleSampler(BaseSampler):
         print(self._reward_fun)
         print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
-        her_sample_size = 2
+        her_sample_size = 1
         t_samples =  np.random.randint(path_length, size=her_sample_size)
 
         future_offset = np.random.uniform(size=her_sample_size) * (path_length - t_samples)
@@ -111,7 +111,7 @@ class HerSimpleSampler(BaseSampler):
             transitions['observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
         ], axis=-1)
 
-        transitions['next_observations.{}'.format(key)] = np.concatenate([
+        transitions['next_observations'] = np.concatenate([
             transitions['next_observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
         ], axis=-1)
 
