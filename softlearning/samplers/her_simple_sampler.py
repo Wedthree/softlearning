@@ -133,7 +133,7 @@ class HerSimpleSampler(BaseSampler):
 
         print('--------After--------')
         print(transitions)
-        self.pool.add_samples(path_length,
+        self.pool.add_samples(her_sample_size,
             observations={'observation': transitions['observations.observation'],
                           'achieved_goal': transitions['observations.achieved_goal'],
                           'desired_goal': transitions['observations.desired_goal']},
