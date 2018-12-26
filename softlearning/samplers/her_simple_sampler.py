@@ -86,11 +86,11 @@ class HerSimpleSampler(BaseSampler):
 
 
     def add_her_samples(self, path, path_length):
-        print(self._future_p)
-        print(self._reward_fun)
-        print(path_length)
+        # print(self._future_p)
+        # print(self._reward_fun)
+        # print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
-        her_sample_size = 2
+        # her_sample_size = 2
         t_samples =  np.random.randint(path_length, size=her_sample_size)
         # print(t_samples)
 
@@ -105,25 +105,25 @@ class HerSimpleSampler(BaseSampler):
 
         transitions = {key: path[key][t_samples].copy() for key in path.keys() if key!='infos'}
 
-        print('--------Before--------')
-        print(transitions)
+        # print('--------Before--------')
+        # print(transitions)
 
         transitions['observations.desired_goal'] = future_ag
         transitions['next_observations.desired_goal'] = future_ag
 
-        transitions['observations'] = np.concatenate([
-            transitions['observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
-        ], axis=-1)
+        # transitions['observations'] = np.concatenate([
+        #     transitions['observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
+        # ], axis=-1)
 
-        transitions['next_observations'] = np.concatenate([
-            transitions['next_observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
-        ], axis=-1)
+        # transitions['next_observations'] = np.concatenate([
+        #     transitions['next_observations.{}'.format(key)] for key in list(self.env.observation_space.spaces.keys())
+        # ], axis=-1)
 
         infos = []
         for t in t_samples:
             infos.append(path['infos'][t])
 
-        transitions['infos'] = infos
+        # transitions['infos'] = infos
 
             
             
@@ -133,8 +133,8 @@ class HerSimpleSampler(BaseSampler):
         reward_params['info'] = infos
         transitions['rewards'] = self._reward_fun(**reward_params)
 
-        print('--------After--------')
-        print(transitions)
+        # print('--------After--------')
+        # print(transitions)
         self.pool.add_samples(her_sample_size,
             observations={'observation': transitions['observations.observation'],
                           'achieved_goal': transitions['observations.achieved_goal'],
