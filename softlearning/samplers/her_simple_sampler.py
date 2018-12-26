@@ -92,13 +92,13 @@ class HerSimpleSampler(BaseSampler):
         her_sample_size = math.ceil(self._future_p*path_length)
         # her_sample_size = 2
         t_samples =  np.random.randint(path_length, size=her_sample_size)
-        print(t_samples)
+        # print(t_samples)
 
         future_offset = np.random.uniform(size=her_sample_size) * (path_length - t_samples)
-        print(future_offset)
+        # print(future_offset)
         future_offset = future_offset.astype(int)
-        future_t = (t_samples + 1 + future_offset)
-        print(future_t)
+        future_t = (t_samples + future_offset)
+        # print(future_t)
 
         future_ag = path['observations.achieved_goal'][future_t]
 
