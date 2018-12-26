@@ -90,7 +90,7 @@ class HerSimpleSampler(BaseSampler):
         print(self._reward_fun)
         print(path_length)
         her_sample_size = math.ceil(self._future_p*path_length)
-        her_sample_size = 1
+        her_sample_size = 2
         t_samples =  np.random.randint(path_length, size=her_sample_size)
 
         future_offset = np.random.uniform(size=her_sample_size) * (path_length - t_samples)
@@ -129,11 +129,16 @@ class HerSimpleSampler(BaseSampler):
         # Re-compute reward since we may have substituted the goal.
         reward_params = {'ag_2': transitions['observations.achieved_goal'], 'g': transitions['observations.desired_goal']}
         reward_params['info'] = infos
-        print(inspect.getargspec(self.env.unwrapped.compute_reward))
         transitions['rewards'] = self._reward_fun(**reward_params)
 
         print('--------After--------')
         print(transitions)
+        self.pool.add_samples(path_length,
+            observations=transitions['observations'],
+            actions=transitions['action'],
+            rewards=transitions['reward'],
+            terminals=transitions['terminal'],
+            next_observations=transitions['next_observation'])
  
 
 
