@@ -135,10 +135,10 @@ class HerSimpleSampler(BaseSampler):
         print(transitions)
         self.pool.add_samples(path_length,
             observations=transitions['observations'],
-            actions=transitions['action'],
-            rewards=transitions['reward'],
-            terminals=transitions['terminal'],
-            next_observations=transitions['next_observation'])
+            actions=transitions['actions'],
+            rewards=transitions['rewards'],
+            terminals=transitions['terminals'],
+            next_observations=transitions['next_observations'])
  
 
 
