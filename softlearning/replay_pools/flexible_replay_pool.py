@@ -46,6 +46,9 @@ class FlexibleReplayPool(ReplayPool):
                 kwargs.pop(field_name, None)
                 if field_name in kwargs
                 else self.fields[field_name]['default_value'])
+            if num_samples > 1:
+                print(getattr(self, field_name)[index])
+                print(values)
             getattr(self, field_name)[index] = values
 
         assert not kwargs, ("Got unexpected fields in the sample: ", kwargs)
