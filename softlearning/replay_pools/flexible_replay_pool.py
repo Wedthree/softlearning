@@ -47,6 +47,8 @@ class FlexibleReplayPool(ReplayPool):
                 if field_name in kwargs
                 else self.fields[field_name]['default_value'])
             if num_samples > 1:
+                print('===========')
+                print(field_name)
                 print(getattr(self, field_name)[index])
                 print(values)
             getattr(self, field_name)[index] = values
