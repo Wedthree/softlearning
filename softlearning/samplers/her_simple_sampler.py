@@ -20,7 +20,7 @@ class HerSimpleSampler(BaseSampler):
 
         def reward_fun(ag_2, g, info):  # vectorized
 
-            return self.env.unwrapped.compute_reward(achieved_goal=ag_2, goal=g, info=info)
+            return self.env.unwrapped.compute_reward(achieved_goal=ag_2, goal=g, info=info).reshape(-1,1)
 
         self._reward_fun = reward_fun
 
@@ -92,12 +92,12 @@ class HerSimpleSampler(BaseSampler):
         her_sample_size = math.ceil(self._future_p*path_length)
         her_sample_size = 2
         t_samples =  np.random.randint(path_length, size=her_sample_size)
-        print(t_samples)
+        # print(t_samples)
 
         future_offset = np.random.uniform(size=her_sample_size) * (path_length - t_samples)
         future_offset = future_offset.astype(int)
         future_t = (t_samples + 1 + future_offset)
-        print(future_t)
+        # print(future_t)
 
         future_ag = path['observations.achieved_goal'][future_t]
 
